@@ -1,0 +1,3 @@
+recordIndex,code,instantiationMoment,title,description,startDate,finishDate,budget,convertedBudget,link,kitchenwareCode,kitchenwareName,kitchenwareType
+0,06-27-21/430,2022/06/27 09:00,Example 1,A good example,2022/11/03 09:00,2022/12/12 11:00,EUR 16.80,EUR 16.80,"",CCC-000,Tomate,INGREDIENT
+1,06-04-22/02,2022/06/04 09:00,Example 3,A good example,2022/11/03 09:00,2022/12/12 11:00,EUR 22.40,EUR 22.40,"",CDC-010,Huevo,INGREDIENT

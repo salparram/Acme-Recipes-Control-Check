@@ -1,0 +1,56 @@
+# i18n-en.i18n
+#
+# Copyright (C) 2012-2022 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+chef.pimpam.form.error.duplicated_code = That code already exists
+chef.pimpam.form.error.null_kitchenware = Invalid or null kitchenware  
+chef.pimpam.form.error.negative = Budget must be positive
+chef.pimpam.form.error.noAcceptedCurrency = It's not an accepted currency
+chef.pimpam.form.error.invalid_startDate = Must be at least one month ahead from the actual date
+chef.pimpam.form.error.invalid_finishDate = Must last one week long
+chef.pimpam.form.error.pattern_code = Date in code must be equal to creation moment
+chef.pimpam.form.error.notPublishedKitchenware = The kitchenware must not be published
+chef.pimpam.form.error.must-be-ingredient = The kitchenware must be an ingredient
+chef.pimpam.form.error.must-be-kitchenUtensil = The kitchenware must be a kitchen utensil
+chef.pimpam.form.error.notYourKitchenware = It's not your kitchenware!!
+
+chef.pimpam.form.button.update = Update
+chef.pimpam.form.submit.update = Update
+chef.pimpam.form.button.create = Create
+chef.pimpam.form.submit.create = Create
+chef.pimpam.form.submit.delete = Delete
+chef.pimpam.form.button.create-kitchenware = Create a kitchenware
+
+
+
+chef.pimpam.list.label.code = Code
+chef.pimpam.list.label.title = Title 
+chef.pimpam.list.label.creation-moment = Instantiation Moment
+
+
+
+
+
+chef.pimpam.form.label.code = Code
+chef.pimpam.form.label.title = Title 
+chef.pimpam.form.label.creation-moment = Instantiation Moment
+chef.pimpam.form.label.description = Description
+chef.pimpam.form.label.start-date = Start Date
+chef.pimpam.form.label.finish-date = Finish Date
+chef.pimpam.form.label.convertedBudget = Converted Budget
+chef.pimpam.form.label.budget = Budget
+chef.pimpam.form.label.link = Link
+chef.pimpam.form.label.kitchenware = Kitchenware
+chef.pimpam.form.label.kitchenwares = Kitchenwares
+chef.pimpam.form.label.kitchenware-code = Kitchenware Code
+chef.pimpam.form.label.kitchenware.wareType = Kitchenware Type
+chef.pimpam.form.label.kitchenware.ingredient = Ingredient
+chef.pimpam.form.label.kitchenware.kitchen-utensil = Kitchen Utensil
+chef.pimpam.form.label.select-kitchenware = Select one kitchenware
+chef.pimpam.form.label.select-none-kitchenware = None

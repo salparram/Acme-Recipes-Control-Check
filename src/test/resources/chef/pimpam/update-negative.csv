@@ -1,0 +1,18 @@
+recordIndex,title,description,startDate,finishDate,budget,link,kitchenwareCode
+0,"",A really bad test,2022/10/11 09:00,2022/12/21 11:00,EUR 9,"",CCC-000
+1,No perdono a la muerte enamorada, no perdono a la vida desatenta, no perdono a la tierra ni a la nada. En mis manos levanto una tormenta de piedras, rayos y hachas estridentes sedienta de catástrofes y hambrienta.,A bad test,2022/10/11 09:00,2022/12/21 11:00,EUR 9,"",CCC-000
+2,Test 2,"",2022/10/11 09:00,2022/12/21 11:00,EUR 9,"",CCC-000
+3,Test 2,Quiero escarbar la tierra con los dientes, quiero apartar la tierra parte a parte a dentelladas secas y calientes. Quiero minar la tierra hasta encontrarte y besarte la noble calavera y desamordazarte y regresarte. Volverás a mi huerto y a mi higuera: por los altos andamios de las flores pajareará tu alma colmenera de angelicales ceras y labores.,2022/10/11 09:00,2022/12/21 11:00,EUR 9,"",CCC-000
+4,Test 2,A really bad test,"",2022/12/21 11:00,EUR 9,"",CCC-000
+5,Test 2,A really bad test,2022/08/11 09:00,2022/12/21 11:00,EUR 9,"",CCC-000
+6,Test 2,A really bad test,2022/10/11 09:00,"",EUR 9,"",CCC-000
+7,Test 2,A really bad test,2022/10/11 09:00,2022/10/12 11:00,EUR 9,"",CCC-000
+8,Test 2,A really bad test,2022/10/11 09:00,2022/12/21 11:00,"","",CCC-000
+9,Test 2,A really bad test,2022/10/11 09:00,2022/12/21 11:00,E 3.50,"",CCC-000
+10,Test 2,A really bad test,2022/10/11 09:00,2022/12/21 11:00,EUR -3.50,"",CCC-000
+11,Test 2,A really bad test,2022/10/11 09:00,2022/12/21 11:00,EUR 3.50,a,CCC-000
+12,Test 3,A really bad test,2022/10/11 09:00,2022/12/21 11:00,EUR 3.50,"",""
+13,Test 3,A really bad test,2022/10/11 09:00,2022/12/21 11:00,EUR 1.50,"",a
+14,Test 3,A really bad test,2022/10/11 09:00,2022/12/21 11:00,EUR 1.50,"",BBB-000
+15,Test 3,A really bad test,2022/10/11 09:00,2022/12/21 11:00,EUR 1.50,"",BJH-020 
+16,Test 3,A really bad test,2022/10/11 09:00,2022/12/21 11:00,EUR 1.50,"",AAA-000
