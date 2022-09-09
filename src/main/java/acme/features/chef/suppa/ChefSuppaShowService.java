@@ -1,10 +1,10 @@
-package acme.features.chef.pimpam;
+package acme.features.chef.suppa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.components.configuration.SystemConfigurationSep;
-import acme.entities.recipes.Pimpam;
+import acme.entities.recipes.Suppa;
 import acme.entities.recipes.WareType;
 import acme.features.authenticated.moneyExchangeSep.AuthenticatedMoneyExchangeSepPerformService;
 import acme.features.authenticated.systemConfigurationSep.AuthenticatedSystemConfigurationSepRepository;
@@ -15,10 +15,10 @@ import acme.framework.services.AbstractShowService;
 import acme.roles.Chef;
 
 @Service
-public class ChefPimpamShowService implements AbstractShowService<Chef, Pimpam>{
+public class ChefSuppaShowService implements AbstractShowService<Chef, Suppa>{
 
 	@Autowired
-	protected ChefPimpamRepository repository;
+	protected ChefSuppaRepository repository;
 	
 	@Autowired
 	protected AuthenticatedSystemConfigurationSepRepository config;
@@ -26,10 +26,10 @@ public class ChefPimpamShowService implements AbstractShowService<Chef, Pimpam>{
 	@Autowired
 	protected AuthenticatedMoneyExchangeSepPerformService moneyExchange;
 	
-	protected Pimpam pimpam;
+	protected Suppa suppa;
 	
 	@Override
-	public boolean authorise(final Request<Pimpam> request) {
+	public boolean authorise(final Request<Suppa> request) {
 		assert request != null;
 		int chefId;
 		Chef chef;
@@ -38,23 +38,23 @@ public class ChefPimpamShowService implements AbstractShowService<Chef, Pimpam>{
 		chefId = request.getPrincipal().getActiveRoleId();
 		chef = this.repository.findOneChefById(chefId);
 		id = request.getModel().getInteger("id");
-		this.pimpam = this.repository.findOnePimpamById(id);
+		this.suppa = this.repository.findOneSuppaById(id);
 		
-		return this.pimpam.getChef().equals(chef);
+		return this.suppa.getChef().equals(chef);
 	}
 
 	@Override
-	public Pimpam findOne(final Request<Pimpam> request) {
+	public Suppa findOne(final Request<Suppa> request) {
 		assert request != null;
 		int id;
 		id = request.getModel().getInteger("id");
-		this.pimpam = this.repository.findOnePimpamById(id);
+		this.suppa = this.repository.findOneSuppaById(id);
 		
-		return this.pimpam;
+		return this.suppa;
 	}
 
 	@Override
-	public void unbind(final Request<Pimpam> request, final Pimpam entity, final Model model) {
+	public void unbind(final Request<Suppa> request, final Suppa entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
@@ -70,7 +70,7 @@ public class ChefPimpamShowService implements AbstractShowService<Chef, Pimpam>{
 			
 	}
 	
-	private void unbindConvertedMoney(final Pimpam entity, final Model model) {
+	private void unbindConvertedMoney(final Suppa entity, final Model model) {
 		final SystemConfigurationSep sc = this.config.findSystemConfiguration();
 		final Money money = this.moneyExchange.computeMoneyExchange(entity.getBudget(), sc.getSystemCurrency()).getChange();
 		model.setAttribute("budgetConverted", money);

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import acme.entities.recipes.Kitchenware;
 import acme.entities.recipes.KitchenwareRecipe;
-import acme.entities.recipes.Pimpam;
+import acme.entities.recipes.Suppa;
 import acme.entities.recipes.WareType;
 import acme.framework.components.models.Model;
 import acme.framework.controllers.Errors;
@@ -87,11 +87,11 @@ public class ChefKitchenwareDeleteService implements AbstractDeleteService<Chef,
 		assert entity != null;
 		
 		Collection<KitchenwareRecipe> kr;
-		Collection<Pimpam> pimpams;
+		Collection<Suppa> suppas;
 		kr = this.repository.findManyKitchenwareRecipesByKitchenwareId(entity.getId());
-		pimpams = this.repository.findManyPimpamsByKitchenwareId(entity.getId());
+		suppas = this.repository.findManySuppasByKitchenwareId(entity.getId());
 		this.repository.deleteAll(kr);
-		this.repository.deleteAll(pimpams);
+		this.repository.deleteAll(suppas);
 		
 		this.repository.delete(entity);
 		

@@ -44,18 +44,18 @@ public class AdministratorDashboardShowServiceSep implements AbstractShowService
 		Integer numFDishRequested;
 		Integer numFDishAccepted;
 		Integer numFDishDenied;
-		Integer numPimpams; // PIMPAM #####################################
+		Integer numSuppa; // PIMPAM #####################################
 
 		numIngredients = this.repository.getNumIngredients();
 		numKitchenUtensils = this.repository.getNumKitchenUtensils();
 		numFDishRequested = this.repository.getNumDishes(DishStatus.PROPOSED);
 		numFDishAccepted = this.repository.getNumDishes(DishStatus.ACCEPTED);
 		numFDishDenied = this.repository.getNumDishes(DishStatus.DENIED);
-		numPimpams = this.repository.getNumPimpams(); // PIMPAM #####################################
+		numSuppa = this.repository.getNumSuppas(); // PIMPAM #####################################
 
 		final Map<String, StatData> ingredientsDataByCurrency = new HashMap<>();
 		final Map<String, StatData> kitchenUtensilsDataByCurrency = new HashMap<>();
-		final Map<String, StatData> pimpamsDataByCurrency = new HashMap<>();
+		final Map<String, StatData> SuppaDataByCurrency = new HashMap<>();
 		final Map<Pair<DishStatus, String>, StatData> fDishesBudgetData = new HashMap<>();
 
 		final SystemConfigurationSep sc = this.repository.findSystemConfigurationSep();
@@ -73,8 +73,8 @@ public class AdministratorDashboardShowServiceSep implements AbstractShowService
 			acceptedCurrencies.forEach(x -> fDishesBudgetData.put(Pair.of(status, x), StatData.of(this.repository.getDishesBudgetDataByStatusAndCurrency(status, x), x)));
 		}
 		
-		//---------PIMPAMS Data By Currency----------------------- // PIMPAM #####################################
-		acceptedCurrencies.forEach(x -> pimpamsDataByCurrency.put(x, StatData.of(this.repository.getPimpamDataByCurrency(x), x)));
+		//---------Suppa Data By Currency----------------------- // PIMPAM #####################################
+		acceptedCurrencies.forEach(x -> SuppaDataByCurrency.put(x, StatData.of(this.repository.getSuppaDataByCurrency(x), x)));
 
 		result = new AdministratorDashboard();
 
@@ -89,8 +89,8 @@ public class AdministratorDashboardShowServiceSep implements AbstractShowService
 		
 		
 		// PIMPAM #####################################
-		result.setPimpamsDataByCurrency(pimpamsDataByCurrency);
-		result.setNumPimpams(numPimpams);
+		result.setSuppasDataByCurrency(SuppaDataByCurrency);
+		result.setNumSuppas(numSuppa);
 		return result;
 	}
 
@@ -106,13 +106,13 @@ public class AdministratorDashboardShowServiceSep implements AbstractShowService
 		final Map<String, StatData> pendings=new HashMap<String, StatData>();
 		final Map<String, StatData> ingredients=new HashMap<String, StatData>();
 		final Map<String, StatData> kitchenUtensils=new HashMap<String, StatData>();
-		final Map<String, StatData> pimpams = new HashMap<String, StatData>(); // PIMPAM #####################################
+		final Map<String, StatData> Suppa = new HashMap<String, StatData>(); // PIMPAM #####################################
 		
 		for(final String curr:this.repository.findSystemConfigurationSep().getAcceptedCurrencies().split(",")) {
 			model.setAttribute("dataIngredient"+curr,  entity.getIngredientsDataByCurrency().get(curr));
 			model.setAttribute("dataKitchenUtensil"+curr, entity.getKitchenUtensilsDataByCurrency().get(curr));
 			//PIMPAM
-			model.setAttribute("dataPimpam" + curr, entity.getPimpamsDataByCurrency().get(curr));
+			model.setAttribute("dataPimpam" + curr, entity.getSuppasDataByCurrency().get(curr));
 
 			accepteds.put(curr, entity.getDishesBudgetData().get(Pair.of(DishStatus.ACCEPTED, curr)));
 			model.setAttribute("accepteds", accepteds);
@@ -127,9 +127,9 @@ public class AdministratorDashboardShowServiceSep implements AbstractShowService
 			model.setAttribute("ingredients",ingredients);
 			
 			// PIMPAM #####################################
-			pimpams.put(curr, entity.getPimpamsDataByCurrency().get(curr));
-			model.setAttribute("pimpams", pimpams);
-			model.setAttribute("ratioOfIngredientsWithPimpum", (double) entity.getNumPimpams()/entity.getNumOfIngredients());
+			Suppa.put(curr, entity.getSuppasDataByCurrency().get(curr));
+			model.setAttribute("Suppa", Suppa);
+			model.setAttribute("ratioOfIngredientsWithPimpum", (double) entity.getNumSuppas()/entity.getNumOfIngredients());
 			
 		};
 }

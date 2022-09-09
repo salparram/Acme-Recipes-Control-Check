@@ -25,7 +25,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Pimpam extends AbstractEntity{
+public class Suppa extends AbstractEntity{
 
 	// Serialisation identifier ----------------------
 
@@ -33,7 +33,7 @@ public class Pimpam extends AbstractEntity{
 		
 		// Attributes  ------------------------------------
 		
-		@Pattern(regexp="^[01][0-9]-[0-3][0-9]-[0-9]{2}/[0-9]{2,4}$")
+		@Pattern(regexp="^[a-zA-Z0-9_]{5}-[0-3][0-9]/[01][0-9]/[0-9]{2}$")
 		@NotBlank
 		@Column(unique=true)
 		protected String code;

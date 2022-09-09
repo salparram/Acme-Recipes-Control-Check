@@ -1,0 +1,5 @@
+key,code,instantiation-moment,title,description,start-date,finish-date,budget,link,key:kitchenware,key:chef
+suppa-01,00000-27/06/21,2022/06/27 09:00,Example 1,A good example,2022/11/03 09:00,2022/12/12 11:00,EUR 16.8,,kitchenware-13,chef-01
+suppa-02,00000-07/05/22,2022/05/07 09:00,Example 2,A good example,2022/11/03 09:00,2022/12/12 11:00,EUR 36.7,,kitchenware-03,chef-02
+suppa-03,00000-04/06/22,2022/06/04 09:00,Example 3,A good example,2022/11/03 09:00,2022/12/12 11:00,EUR 22.4,,kitchenware-14,chef-01
+suppa-04,11111-10/06/22,2022/06/10 09:00,Example 4,A good example,2022/11/03 09:00,2022/12/12 11:00,EUR 14.75,,kitchenware-16,chef-03

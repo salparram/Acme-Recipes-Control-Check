@@ -1,27 +1,28 @@
-package acme.testing.chef.pimpam;
+package acme.testing.chef.suppa;
 
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 import acme.testing.TestHarness;
 
-public class ChefPimpamUpdateTests extends TestHarness{
+public class ChefSuppaCreateTests extends TestHarness{
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/chef/pimpam/update-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
-	@Order(60)
-	public void positivePimpamUpdateTest(final String title, final String description, 
+	@CsvFileSource(resources = "/chef/suppa/create-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
+	@Order(30)
+	public void positiveSuppaCreateTest(final String title, final String description, 
 		final String startDate, final String finishDate, final String budget, final String link, 
 		final String kitchenwareCode) {
 
 		super.signIn("chef1", "chef1");
-		super.clickOnMenu("Chef", "My Pimpams");
+		super.clickOnMenu("Chef", "My Suppas");
 
 		super.checkListingExists();
-		super.clickOnListingRecord(0);
+		super.checkButtonExists("Create");
+		super.clickOnButton("Create");
 		super.checkFormExists();
-		super.checkSubmitExists("Update");
 
 		super.fillInputBoxIn("title", title);
 		super.fillInputBoxIn("description", description);
@@ -30,7 +31,7 @@ public class ChefPimpamUpdateTests extends TestHarness{
 		super.fillInputBoxIn("budget", budget);
 		super.fillInputBoxIn("link", link);
 		super.fillInputBoxIn("kitchenwareCode", kitchenwareCode);
-		super.clickOnSubmit("Update");
+		super.clickOnSubmit("Create");
 		
 		super.checkNotErrorsExist();
 		super.signOut();
@@ -38,19 +39,19 @@ public class ChefPimpamUpdateTests extends TestHarness{
 	}
 	
 	@ParameterizedTest
-	@CsvFileSource(resources = "/chef/pimpam/update-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
-	@Order(70)
-	public void negativePimpamUpdateTest(final int recordIndex, final String title, 
+	@CsvFileSource(resources = "/chef/suppa/create-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
+	@Order(40)
+	public void negativeSuppaCreateTest(final int recordIndex, final String title, 
 		final String description, final String startDate, final String finishDate, 
 		final String budget, final String link, final String kitchenwareCode) {
 
 		super.signIn("chef1", "chef1");
-		super.clickOnMenu("Chef", "My Pimpams");
+		super.clickOnMenu("Chef", "My Suppas");
 
 		super.checkListingExists();
-		super.clickOnListingRecord(0);
+		super.checkButtonExists("Create");
+		super.clickOnButton("Create");
 		super.checkFormExists();
-		super.checkSubmitExists("Update");
 
 		super.fillInputBoxIn("title", title);
 		super.fillInputBoxIn("description", description);
@@ -59,8 +60,8 @@ public class ChefPimpamUpdateTests extends TestHarness{
 		super.fillInputBoxIn("budget", budget);
 		super.fillInputBoxIn("link", link);
 		super.fillInputBoxIn("startDate", startDate);
-		super.fillInputBoxIn("kitchenwareCode", kitchenwareCode);
-		super.clickOnSubmit("Update");
+		super.fillInputBoxIn("kitchenwareCode", kitchenwareCode); 
+		super.clickOnSubmit("Create");
 		
 		// Sucede porque el check errors no detecta un error que viene de "*", aunque visualmente
 		// se puede ver que el mensaje de error funciona
@@ -73,5 +74,31 @@ public class ChefPimpamUpdateTests extends TestHarness{
 		super.signOut();
 
 	}
+	
+	@Test
+	@Order(50)
+	public void hackingTest() {
+		final String pathCreateKitchenware= "/chef/suppa/create";
+		
+		
+		super.checkNotLinkExists("Chef");
+		super.navigate(pathCreateKitchenware);
+		super.checkPanicExists();
+		
+		super.signIn("administrator", "administrator");
+		super.checkNotLinkExists("Chef");
+		super.navigate(pathCreateKitchenware);
+		super.checkPanicExists();
+		super.signOut();
+		
+		super.signIn("epicure1", "epicure1");
+		super.checkNotLinkExists("Chef");
+		super.navigate(pathCreateKitchenware);
+		super.checkPanicExists();
+		
+		super.signOut();
+		
+	}
+
 
 }

@@ -1,10 +1,10 @@
-package acme.features.chef.pimpam;
+package acme.features.chef.suppa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.recipes.Kitchenware;
-import acme.entities.recipes.Pimpam;
+import acme.entities.recipes.Suppa;
 import acme.entities.recipes.WareType;
 import acme.framework.components.models.Model;
 import acme.framework.controllers.Errors;
@@ -13,15 +13,15 @@ import acme.framework.services.AbstractDeleteService;
 import acme.roles.Chef;
 
 @Service
-public class ChefPimpamDeleteService implements AbstractDeleteService<Chef, Pimpam>{
+public class ChefSuppaDeleteService implements AbstractDeleteService<Chef, Suppa>{
 
 	@Autowired
-	protected ChefPimpamRepository repository;
+	protected ChefSuppaRepository repository;
 	
-	protected Pimpam pimpam;
+	protected Suppa suppa;
 	
 	@Override
-	public boolean authorise(final Request<Pimpam> request) {
+	public boolean authorise(final Request<Suppa> request) {
 		assert request != null;
 		int id;
 		int chefId;
@@ -30,15 +30,15 @@ public class ChefPimpamDeleteService implements AbstractDeleteService<Chef, Pimp
 		chefId = request.getPrincipal().getActiveRoleId();
 		chef = this.repository.findOneChefById(chefId);
 		id = request.getModel().getInteger("id");
-		this.pimpam = this.repository.findOnePimpamById(id);
-		final Kitchenware kitchenware = this.pimpam.getKitchenware(); 
+		this.suppa = this.repository.findOneSuppaById(id);
+		final Kitchenware kitchenware = this.suppa.getKitchenware(); 
 		
-		return this.pimpam.getChef().equals(chef) && 
+		return this.suppa.getChef().equals(chef) && 
 			kitchenware.getWareType().equals(WareType.INGREDIENT) && !kitchenware.isPublished();
 	}
 
 	@Override
-	public void bind(final Request<Pimpam> request, final Pimpam entity, final Errors errors) {
+	public void bind(final Request<Suppa> request, final Suppa entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
@@ -48,7 +48,7 @@ public class ChefPimpamDeleteService implements AbstractDeleteService<Chef, Pimp
 	}
 
 	@Override
-	public void unbind(final Request<Pimpam> request, final Pimpam entity, final Model model) {
+	public void unbind(final Request<Suppa> request, final Suppa entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
@@ -63,32 +63,32 @@ public class ChefPimpamDeleteService implements AbstractDeleteService<Chef, Pimp
 	}
 
 	@Override
-	public Pimpam findOne(final Request<Pimpam> request) {
+	public Suppa findOne(final Request<Suppa> request) {
 		assert request != null;
 		int id;
 		id = request.getModel().getInteger("id");
-		this.pimpam = this.repository.findOnePimpamById(id);
+		this.suppa = this.repository.findOneSuppaById(id);
 		
-		return this.pimpam;
+		return this.suppa;
 	}
 
 	@Override
-	public void validate(final Request<Pimpam> request, final Pimpam entity, final Errors errors) {
+	public void validate(final Request<Suppa> request, final Suppa entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
 		
 		if(!errors.hasErrors("kitchenware")) {
 			errors.state(request, entity.getKitchenware().getWareType().equals(WareType.INGREDIENT), 
-				"*", "chef.pimpam.form.error.must-be-ingredient");
+				"*", "chef.suppa.form.error.must-be-ingredient");
 			/*errors.state(request, !entity.getKitchenware().getWareType().equals(WareType.KITCHEN_UTENSIL), 
-				"*", "chef.pimpam.form.error.must-be-kitchenUtensil");*/
+				"*", "chef.suppa.form.error.must-be-kitchenUtensil");*/
 		}
 		
 	}
 
 	@Override
-	public void delete(final Request<Pimpam> request, final Pimpam entity) {
+	public void delete(final Request<Suppa> request, final Suppa entity) {
 		assert request != null;
 		assert entity != null;
 		

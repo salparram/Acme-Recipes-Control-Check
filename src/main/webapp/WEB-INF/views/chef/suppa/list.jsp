@@ -17,9 +17,9 @@
 
 <acme:list>
 
-	<acme:list-column code="chef.pimpam.list.label.creation-moment" path="instantiationMoment"/>
-	<acme:list-column code="chef.pimpam.list.label.code" path="code"/>			
-	<acme:list-column code="chef.pimpam.list.label.title" path="title"/>
+	<acme:list-column code="chef.suppa.list.label.creation-moment" path="instantiationMoment"/>
+	<acme:list-column code="chef.suppa.list.label.code" path="code"/>			
+	<acme:list-column code="chef.suppa.list.label.title" path="title"/>
 	
 </acme:list>
-<acme:button code="chef.pimpam.form.button.create" action="/chef/pimpam/create"/>
+<acme:button code="chef.suppa.form.button.create" action="/chef/suppa/create"/>

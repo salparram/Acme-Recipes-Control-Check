@@ -26,8 +26,8 @@ public interface AdministratorDashboardRepositorySep extends AbstractRepository 
 	@Query("select count(fd) from FineDish fd where fd.status =:status")
 	Integer getNumDishes(DishStatus status);
 	
-	@Query("select count(DISTINCT fd.kitchenware) from Pimpam fd")
-	Integer getNumPimpams();
+	@Query("select count(DISTINCT fd.kitchenware) from Suppa fd")
+	Integer getNumSuppas();
 
 	@Query("select sc from SystemConfigurationSep sc")
 	SystemConfigurationSep findSystemConfigurationSep();
@@ -40,10 +40,10 @@ public interface AdministratorDashboardRepositorySep extends AbstractRepository 
 		+ "and k.retailPrice.currency=:currency")
 	Tuple getKitchenwareDataByCurrency(WareType type, String currency);
 	//--------------------------------------------------------------------
-	//PIMPAMS -----------------------
-	@Query("select sum(k.budget.amount), avg(k.budget.amount), stddev(k.budget.amount),min(k.budget.amount)," + " max(k.budget.amount) from Pimpam k where "
+	//SuppaS -----------------------
+	@Query("select sum(k.budget.amount), avg(k.budget.amount), stddev(k.budget.amount),min(k.budget.amount)," + " max(k.budget.amount) from Suppa k where "
 		+ "k.budget.currency=:currency")
-	Tuple getPimpamDataByCurrency(String currency);
+	Tuple getSuppaDataByCurrency(String currency);
 	
 	@Query("select sum(fd.budget.amount), avg(fd.budget.amount), stddev(fd.budget.amount), min(fd.budget.amount), max(fd.budget.amount) from FineDish fd where fd.status=:status and fd.budget.currency=:currency")
 	Tuple getDishesBudgetDataByStatusAndCurrency(DishStatus status, String currency);

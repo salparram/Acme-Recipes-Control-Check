@@ -1,0 +1,61 @@
+# i18n-es.i18n
+#
+# Copyright (C) 2012-2022 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+chef.suppa.form.error.duplicated_code = Ese código ya existe
+chef.suppa.form.error.null_kitchenware = Artículo inválido o nulo  
+chef.suppa.form.error.negative = El presupuesto debe ser positivo 
+chef.suppa.form.error.noAcceptedCurrency = No es una moneda aceptada
+chef.suppa.form.error.invalid_startDate = Debe ser un mes más tarde desde la fecha actual
+chef.suppa.form.error.invalid_finishDate = Debe durar al menos una semana
+chef.suppa.form.error.pattern_code = La fecha en el código debe ser la misma que el momento de creación
+chef.suppa.form.error.notPublishedKitchenware = El artículo debe no estar publicado
+chef.suppa.form.error.must-be-ingredient = El artículo debe ser un ingrediente
+chef.suppa.form.error.must-be-kitchenUtensil = El artículo debe ser un utensilio de cocina
+chef.suppa.form.error.notYourKitchenware = No es tu artículo!!
+
+chef.suppa.form.button.update = Actualizar
+chef.suppa.form.submit.update = Actualizar
+chef.suppa.form.button.create = Crear
+chef.suppa.form.submit.create = Crear
+chef.suppa.form.submit.delete = Eliminar
+chef.suppa.form.button.create-kitchenware = Crear un artefacto
+
+
+
+chef.suppa.list.label.code = Código
+chef.suppa.list.label.title = Título
+chef.suppa.list.label.creation-moment = Momento de creación
+chef.suppa.list.label.description = Descripción
+chef.suppa.list.label.start-date = Fecha inicial
+chef.suppa.list.label.finish-date = Fecha final
+chef.suppa.list.label.budget = Presupuesto
+chef.suppa.list.label.link = Link
+chef.suppa.list.label.kitchenware = Artículo
+
+
+
+
+chef.suppa.form.label.code = Código
+chef.suppa.form.label.title = Título
+chef.suppa.form.label.creation-moment = Momento de creación
+chef.suppa.form.label.description = Descripción
+chef.suppa.form.label.start-date = Fecha inicial
+chef.suppa.form.label.finish-date = Fecha final
+chef.suppa.form.label.budget = Presupuesto
+chef.suppa.form.label.convertedBudget = Presupuesto convertido
+chef.suppa.form.label.link = Link
+chef.suppa.form.label.kitchenware = Artículo
+chef.suppa.form.label.kitchenwares = Artículos
+chef.suppa.form.label.kitchenware-code = Código del artículo
+chef.suppa.form.label.kitchenware.wareType = Tipo de artículo
+chef.suppa.form.label.kitchenware.ingredient = Ingrediente
+chef.suppa.form.label.kitchenware.kitchen-utensil = Utensilio de cocina
+chef.suppa.form.label.select-kitchenware = Selecciona un artículo
+chef.suppa.form.label.select-none-kitchenware = Ninguno

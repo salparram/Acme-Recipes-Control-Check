@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import acme.entities.recipes.Kitchenware;
 import acme.entities.recipes.KitchenwareRecipe;
-import acme.entities.recipes.Pimpam;
 import acme.entities.recipes.Recipe;
+import acme.entities.recipes.Suppa;
 import acme.framework.repositories.AbstractRepository;
 import acme.roles.Chef;
 
@@ -33,6 +33,6 @@ public interface ChefKitchenwareRepository extends AbstractRepository{
 	@Query("select kr from KitchenwareRecipe kr where kr.kitchenware.id =:id")
 	Collection<KitchenwareRecipe> findManyKitchenwareRecipesByKitchenwareId(int id);
 	
-	@Query("select p from Pimpam p where p.kitchenware.id = :id")
-	Collection<Pimpam> findManyPimpamsByKitchenwareId(int id);
+	@Query("select p from Suppa p where p.kitchenware.id = :id")
+	Collection<Suppa> findManySuppasByKitchenwareId(int id);
 }

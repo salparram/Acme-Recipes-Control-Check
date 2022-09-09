@@ -1,4 +1,4 @@
-package acme.features.chef.pimpam;
+package acme.features.chef.suppa;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.recipes.Kitchenware;
-import acme.entities.recipes.Pimpam;
+import acme.entities.recipes.Suppa;
 import acme.entities.recipes.WareType;
 import acme.features.authenticated.systemConfigurationSep.AuthenticatedSystemConfigurationSepRepository;
 import acme.framework.components.models.Model;
@@ -23,26 +23,26 @@ import acme.framework.services.AbstractCreateService;
 import acme.roles.Chef;
 
 @Service
-public class ChefPimpamCreateService implements AbstractCreateService<Chef, Pimpam>{
+public class ChefSuppaCreateService implements AbstractCreateService<Chef, Suppa>{
 
 	
 	@Autowired
-	protected ChefPimpamRepository repository;
+	protected ChefSuppaRepository repository;
 	
 	@Autowired
 	protected AuthenticatedSystemConfigurationSepRepository config;
 	
-	protected Pimpam pimpam;
+	protected Suppa suppa;
 	
 	@Override
-	public boolean authorise(final Request<Pimpam> request) {
+	public boolean authorise(final Request<Suppa> request) {
 		assert request != null;
 		return request.getPrincipal().hasRole(Chef.class);
 	}
 	
 
 	@Override
-	public void bind(final Request<Pimpam> request, final Pimpam entity, final Errors errors) {
+	public void bind(final Request<Suppa> request, final Suppa entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
@@ -53,7 +53,7 @@ public class ChefPimpamCreateService implements AbstractCreateService<Chef, Pimp
 		final String kitchenwareCode = String.valueOf(request.getModel().getAttribute("kitchenwareCode"));
 		final Kitchenware kitchenware = this.repository.findOneKitchenwareByCode(kitchenwareCode);
 		if(!errors.hasErrors("kitchenware")) {
-			errors.state(request, kitchenware!=null, "*", "chef.pimpam.form.error.null_kitchenware");
+			errors.state(request, kitchenware!=null, "*", "chef.suppa.form.error.null_kitchenware");
 		}
 		if(kitchenware != null) {
 			entity.setCode(this.codeFormat(kitchenware));
@@ -63,7 +63,7 @@ public class ChefPimpamCreateService implements AbstractCreateService<Chef, Pimp
 	}
 
 	@Override
-	public void unbind(final Request<Pimpam> request, final Pimpam entity, final Model model) {
+	public void unbind(final Request<Suppa> request, final Suppa entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
@@ -97,31 +97,34 @@ public class ChefPimpamCreateService implements AbstractCreateService<Chef, Pimp
 		if(day.length() == 1) {
 			day = "0" + day; 
 		}
-		final Collection<String> pimpamCodes = this.repository.findManyPimpamCodesByKitchenwareId(kitchenware.getId());
-		if(pimpamCodes == null || pimpamCodes.isEmpty()) {
-			return month + "-" + day + "-" + yearStr + "/00";
+		final Collection<String> suppaCodes = this.repository.findManySuppaCodesByKitchenwareId(kitchenware.getId());
+		if(suppaCodes == null || suppaCodes.isEmpty()) {
+			return "00000"+ "-" + day + "/" + month + "/" + yearStr;
 		}
-		final OptionalInt secondPartCodeOptInt = pimpamCodes.stream().filter(c -> this.isValidCode(c))
+		final OptionalInt secondPartCodeOptInt = suppaCodes.stream().filter(c -> this.isValidCode(c))
 			.mapToInt(c-> Integer.parseInt(c.split("/")[1])).max();
 		Integer secondPartCodeInt;
 		if(secondPartCodeOptInt.isPresent()) {
 			secondPartCodeInt = secondPartCodeOptInt.getAsInt() + 1;
 		}
 		else {
-			return month + "-" + day + "-" + yearStr + "/00";
+			return "00000" + "-" + day + "/" + month + "/" + yearStr;
 		}
-		String secondPartCode = secondPartCodeInt.toString(); 
-		if(secondPartCode.length() == 1) {
-			secondPartCode = "0" + secondPartCode;
+		final String firstPartCode = secondPartCodeInt.toString(); 
+		final int numZeros = 5 - firstPartCode.length();
+		String firstPartCodeRepeated = "";
+		for (int i = 0; i < numZeros; i++) {
+			firstPartCodeRepeated = firstPartCodeRepeated + firstPartCode;
 		}
-		return month + "-" + day + "-" + yearStr + "/" + secondPartCode;
+		
+		return  firstPartCodeRepeated + "-" + day + "/" + month + "/" + yearStr + "/";
 	}
 	
 	private boolean isValidCode(final String code) {
 		
 		final LocalDate now = LocalDate.now();
 		String[] dateCode;
-		dateCode = code.split("/")[0].split("-"); // 22/05/05 FRQ-2545
+		dateCode = code.split("-")[1].split("/"); // 22/05/05 FRQ-2545
 		
 		String creationMomentYear;
 		String creationMomentMonth;
@@ -139,12 +142,12 @@ public class ChefPimpamCreateService implements AbstractCreateService<Chef, Pimp
 			creationMomentDay = "0" + creationMomentDay; 
 		}
 		
-		return dateCode[0].equals(creationMomentMonth) && dateCode[1].equals(creationMomentDay) && 
+		return dateCode[0].equals(creationMomentDay) && dateCode[1].equals(creationMomentMonth) && 
 			dateCode[2].equals(creationMomentYear);
 	}
 
 	@Override
-	public Pimpam instantiate(final Request<Pimpam> request) {
+	public Suppa instantiate(final Request<Suppa> request) {
 		assert request != null;
 		
 		Chef chef;
@@ -165,28 +168,28 @@ public class ChefPimpamCreateService implements AbstractCreateService<Chef, Pimp
 		finishDate = new Date();
 		
 		
-		this.pimpam = new Pimpam();
-		this.pimpam.setCode("");
-		this.pimpam.setTitle("");
-		this.pimpam.setDescription("");
-		this.pimpam.setLink("");
-		this.pimpam.setChef(chef);
-		this.pimpam.setInstantiationMoment(creationDate);
-		this.pimpam.setStartDate(startDate);
-		this.pimpam.setFinishDate(finishDate);
+		this.suppa = new Suppa();
+		this.suppa.setCode("");
+		this.suppa.setTitle("");
+		this.suppa.setDescription("");
+		this.suppa.setLink("");
+		this.suppa.setChef(chef);
+		this.suppa.setInstantiationMoment(creationDate);
+		this.suppa.setStartDate(startDate);
+		this.suppa.setFinishDate(finishDate);
 				
-		return this.pimpam;
+		return this.suppa;
 	}
 
 	@Override
-	public void validate(final Request<Pimpam> request, final Pimpam entity, final Errors errors) {
+	public void validate(final Request<Suppa> request, final Suppa entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
 		
 		if (!errors.hasErrors("code")) {
-			this.pimpam = this.repository.findOnePimpamByCode(entity.getCode());
-			errors.state(request, this.pimpam == null, "code", "chef.pimpam.form.error.duplicated_code");
+			this.suppa = this.repository.findOneSuppaByCode(entity.getCode());
+			errors.state(request, this.suppa == null, "code", "chef.suppa.form.error.duplicated_code");
 		}
 		if(!errors.hasErrors("startDate")) {
 			Date minimumDate;
@@ -196,7 +199,7 @@ public class ChefPimpamCreateService implements AbstractCreateService<Chef, Pimp
 			calendar.add(Calendar.MONTH, 1);
 			minimumDate = calendar.getTime();
 			
-			errors.state(request, entity.getStartDate().after(minimumDate), "startDate", "chef.pimpam.form.error.invalid_startDate");
+			errors.state(request, entity.getStartDate().after(minimumDate), "startDate", "chef.suppa.form.error.invalid_startDate");
 		}
 		
 		if(!errors.hasErrors("finishDate") && entity.getStartDate() != null) {
@@ -209,38 +212,38 @@ public class ChefPimpamCreateService implements AbstractCreateService<Chef, Pimp
 			calendar.add(Calendar.WEEK_OF_YEAR, 1);
 			minimunDate = calendar.getTime();
 			
-			errors.state(request, entity.getFinishDate().after(minimunDate), "finishDate", "chef.pimpam.form.error.invalid_finishDate");
+			errors.state(request, entity.getFinishDate().after(minimunDate), "finishDate", "chef.suppa.form.error.invalid_finishDate");
 		}
 		
 		if(!errors.hasErrors("budget")) {
 			final String entityCurrency = entity.getBudget().getCurrency();
 			final Double amount = entity.getBudget().getAmount();
-			errors.state(request, amount > 0, "budget", "chef.pimpam.form.error.negative");
+			errors.state(request, amount > 0, "budget", "chef.suppa.form.error.negative");
 			
 			final List<String> currencies= new ArrayList<String>();
 			final String[] acceptedCurrencies=this.config.findAcceptedCurrencies().split(",");
 			for (final String currency : acceptedCurrencies){
 			    currencies.add(currency);
 			    }
-			errors.state(request, currencies.contains(entityCurrency) , "budget", "chef.pimpam.form.error.noAcceptedCurrency");
+			errors.state(request, currencies.contains(entityCurrency) , "budget", "chef.suppa.form.error.noAcceptedCurrency");
 		}
 		
 		if(!errors.hasErrors("kitchenware")) {
 			final Kitchenware kitchenware = entity.getKitchenware();
 			final int chefId = request.getPrincipal().getActiveRoleId();
 			final Chef chef = this.repository.findOneChefById(chefId); 
-			errors.state(request, chef.equals(kitchenware.getChef()), "*", "chef.pimpam.form.error.notYourKitchenware");
-			errors.state(request, !kitchenware.isPublished(), "*", "chef.pimpam.form.error.notPublishedKitchenware");
+			errors.state(request, chef.equals(kitchenware.getChef()), "*", "chef.suppa.form.error.notYourKitchenware");
+			errors.state(request, !kitchenware.isPublished(), "*", "chef.suppa.form.error.notPublishedKitchenware");
 			errors.state(request, entity.getKitchenware().getWareType().equals(WareType.INGREDIENT), 
-				"*", "chef.pimpam.form.error.must-be-ingredient");
+				"*", "chef.suppa.form.error.must-be-ingredient");
 			/*errors.state(request, !entity.getKitchenware().getWareType().equals(WareType.KITCHEN_UTENSIL), 
-				"*", "chef.pimpam.form.error.must-be-kitchenUtensil");*/
+				"*", "chef.suppa.form.error.must-be-kitchenUtensil");*/
 		}
 		
 	}
 
 	@Override
-	public void create(final Request<Pimpam> request, final Pimpam entity) {
+	public void create(final Request<Suppa> request, final Suppa entity) {
 		assert request != null;
 		assert entity != null;
 		

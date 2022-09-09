@@ -22,7 +22,7 @@ public class AdministratorDashboard implements Serializable {
 	Integer											numDishesRequested;
 	Integer											numDishesAccepted;
 	Integer											numDishesDenied;
-	Integer											numPimpams;
+	Integer											numSuppas;
 
 	//StatData=[Sum, Average, Desviation, Minimum, Maximum]
 
@@ -30,7 +30,7 @@ public class AdministratorDashboard implements Serializable {
 
 	Map<String, StatData>							kitchenUtensilsDataByCurrency;
 	
-	Map<String, StatData>							pimpamsDataByCurrency;
+	Map<String, StatData>							suppasDataByCurrency;
 
 	Map<Pair<DishStatus, String>, StatData>	dishesBudgetData;
 }
